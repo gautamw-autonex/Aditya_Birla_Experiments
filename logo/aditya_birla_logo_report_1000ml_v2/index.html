@@ -1,0 +1,2355 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+Aditya Birla Logo Detection Validation
+</title>
+
+
+<style>
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: #f4f6f8;
+
+    color: #17202a;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.header {
+
+    background: white;
+
+    border-bottom:
+        1px solid #e1e5e9;
+
+    padding:
+        28px 40px;
+}
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 650;
+}
+
+.header p {
+
+    margin:
+        8px 0 0;
+
+    color: #66717d;
+}
+
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.container {
+
+    max-width: 1400px;
+
+    margin:
+        0 auto;
+
+    padding:
+        25px 35px 50px;
+}
+
+
+/* ============================================================
+   TABS
+   ============================================================ */
+
+.tabs {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+}
+
+.tab-button {
+
+    border: none;
+
+    background: #e5e9ed;
+
+    color: #37414a;
+
+    padding:
+        12px 22px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.tab-button.active {
+
+    background: #17202a;
+
+    color: white;
+}
+
+.tab-content {
+
+    display: none;
+}
+
+.tab-content.active {
+
+    display: block;
+}
+
+
+/* ============================================================
+   OVERVIEW CARDS
+   ============================================================ */
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                220px,
+                1fr
+            )
+        );
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+}
+
+.card {
+
+    background: white;
+
+    border:
+        1px solid #e1e5e9;
+
+    border-radius: 12px;
+
+    padding: 22px;
+}
+
+.card .label {
+
+    color: #697581;
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+}
+
+.card .value {
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+.card .small {
+
+    margin-top: 5px;
+
+    color: #75808a;
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: #e7f7ec;
+
+    color: #087a2e;
+
+    border-radius: 999px;
+
+    padding:
+        8px 14px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+
+.section {
+
+    background: white;
+
+    border:
+        1px solid #e1e5e9;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+}
+
+.section h2 {
+
+    margin-top: 0;
+
+    font-size: 19px;
+}
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                250px,
+                1fr
+            )
+        );
+
+    gap: 12px;
+}
+
+.detail {
+
+    background: #f7f8fa;
+
+    padding: 14px;
+
+    border-radius: 8px;
+}
+
+.detail .key {
+
+    font-size: 12px;
+
+    color: #697581;
+}
+
+.detail .val {
+
+    font-weight: 600;
+
+    margin-top: 4px;
+}
+
+
+/* ============================================================
+   VIDEO LAYOUT
+   ============================================================ */
+
+/*
+   IMPORTANT:
+   Video is deliberately smaller now.
+*/
+
+.video-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(500px, 820px)
+        340px;
+
+    justify-content: center;
+
+    align-items: start;
+
+    gap: 20px;
+}
+
+@media(max-width: 1100px) {
+
+    .video-layout {
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+/* ============================================================
+   VIDEO
+   ============================================================ */
+
+.video-box {
+
+    background: #111;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    width: 100%;
+}
+
+video {
+
+    width: 100%;
+
+    max-height: 470px;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+
+/* ============================================================
+   VIDEO CONTROLS
+   ============================================================ */
+
+.controls {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+.controls button {
+
+    border: none;
+
+    background: #17202a;
+
+    color: white;
+
+    padding:
+        10px 15px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.controls button:hover {
+
+    background: #303b45;
+}
+
+
+/* ============================================================
+   DETECTION PANEL
+   ============================================================ */
+
+.detection-panel {
+
+    background: white;
+
+    border:
+        1px solid #e1e5e9;
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    height: fit-content;
+}
+
+.detected-status {
+
+    color: #087a2e;
+
+    font-size: 21px;
+
+    font-weight: 750;
+
+    margin-bottom: 18px;
+}
+
+.crop-image {
+
+    width: 100%;
+
+    max-height: 300px;
+
+    object-fit: contain;
+
+    background: #f3f4f5;
+
+    border-radius: 8px;
+
+    margin-bottom: 18px;
+
+    cursor: zoom-in;
+}
+
+
+/* ============================================================
+   METADATA
+   ============================================================ */
+
+.metadata-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        9px 0;
+
+    border-bottom:
+        1px solid #edf0f2;
+
+    font-size: 14px;
+}
+
+.metadata-row .key {
+
+    color: #697581;
+}
+
+.metadata-row .value {
+
+    font-weight: 600;
+
+    text-align: right;
+}
+
+.confidence {
+
+    color: #087a2e;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+
+.gallery {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(
+                300px,
+                1fr
+            )
+        );
+
+    gap: 20px;
+}
+
+.frame-card {
+
+    background: white;
+
+    border:
+        1px solid #e1e5e9;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.frame-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 8px 24px
+        rgba(0,0,0,0.10);
+}
+
+.frame-card img {
+
+    width: 100%;
+
+    display: block;
+}
+
+.frame-info {
+
+    padding: 16px;
+}
+
+.frame-title {
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.note {
+
+    color: #697581;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   IMAGE VIEWER / ZOOM MODAL
+   ============================================================ */
+
+.image-modal {
+
+    display: none;
+
+    position: fixed;
+
+    z-index: 9999;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.88);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    overflow: auto;
+}
+
+.image-modal.active {
+
+    display: flex;
+}
+
+.modal-content {
+
+    position: relative;
+
+    max-width: 95vw;
+
+    max-height: 95vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.modal-image {
+
+    max-width: 90vw;
+
+    max-height: 82vh;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    background: white;
+
+    cursor: zoom-in;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.modal-image.zoomed {
+
+    transform:
+        scale(1.8);
+
+    cursor: zoom-out;
+}
+
+.modal-close {
+
+    position: fixed;
+
+    top: 20px;
+
+    right: 30px;
+
+    width: 45px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #17202a;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    z-index: 10000;
+}
+
+.modal-title {
+
+    color: white;
+
+    margin-top: 15px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+
+    margin-top: 30px;
+
+    text-align: center;
+
+    color: #89939c;
+
+    font-size: 12px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+
+<div class="header">
+
+    <h1>
+        Aditya Birla Logo Detection
+        Validation Report
+    </h1>
+
+    <p>
+        Computer Vision Inspection
+        &amp; Center-Belt Validation
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- ============================================================
+     TABS
+     ============================================================ -->
+
+<div class="tabs">
+
+    <button
+        class="tab-button active"
+        onclick="openTab('overview', this)"
+    >
+        Overview
+    </button>
+
+    <button
+        class="tab-button"
+        onclick="openTab('videoTab', this)"
+    >
+        Detection Video
+    </button>
+
+    <button
+        class="tab-button"
+        onclick="openTab('framesTab', this)"
+    >
+        Detected Frames
+    </button>
+
+</div>
+
+
+<!-- ============================================================
+     OVERVIEW
+     ============================================================ -->
+
+<div
+    id="overview"
+    class="tab-content active"
+>
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="label">
+                LOGO DETECTIONS
+            </div>
+
+            <div
+                class="value"
+                id="detectedFrames"
+            >
+                -
+            </div>
+
+            <div class="small">
+                Frames with valid detection
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                AVERAGE CONFIDENCE
+            </div>
+
+            <div
+                class="value"
+                id="avgConfidence"
+            >
+                -
+            </div>
+
+            <div class="small">
+                Across valid detections
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                VIDEO FRAMES
+            </div>
+
+            <div
+                class="value"
+                id="totalFrames"
+            >
+                -
+            </div>
+
+            <div class="small">
+                Total frames analyzed
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                VIDEO FPS
+            </div>
+
+            <div
+                class="value"
+                id="videoFPS"
+            >
+                -
+            </div>
+
+            <div class="small">
+                Original video rate
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                VIDEO DURATION
+            </div>
+
+            <div
+                class="value"
+                id="videoDuration"
+            >
+                -
+            </div>
+
+            <div class="small">
+                Original duration
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                VALIDATION
+            </div>
+
+            <div
+                class="value"
+                style="font-size:20px;"
+            >
+
+                <span class="status">
+                    ✓ CENTER BELT
+                </span>
+
+            </div>
+
+            <div class="small">
+
+                Entire bounding box inside
+                detection zone
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ========================================================
+         DETECTION SUMMARY
+         ======================================================== -->
+
+    <div class="section">
+
+        <h2>
+            Detection Summary
+        </h2>
+
+        <div class="details-grid">
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Model
+                </div>
+
+                <div class="val">
+                    MobileNetV3 Large FPN
+                    Faster R-CNN
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Confidence Threshold
+                </div>
+
+                <div
+                    class="val"
+                    id="confidenceThreshold"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Center Belt
+                </div>
+
+                <div
+                    class="val"
+                    id="centerBelt"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Acceptance Rule
+                </div>
+
+                <div class="val">
+
+                    Entire bounding box must
+                    remain inside center belt
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         HARDWARE
+         ======================================================== -->
+
+    <div class="section">
+
+        <h2>
+            Hardware
+        </h2>
+
+        <div class="details-grid">
+
+
+            <div class="detail">
+
+                <div class="key">
+                    CPU
+                </div>
+
+                <div
+                    class="val"
+                    id="cpuInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    GPU
+                </div>
+
+                <div
+                    class="val"
+                    id="gpuInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    CUDA
+                </div>
+
+                <div
+                    class="val"
+                    id="cudaInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Processing Device
+                </div>
+
+                <div
+                    class="val"
+                    id="deviceInfo"
+                ></div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         PERFORMANCE
+         ======================================================== -->
+
+    <div class="section">
+
+        <h2>
+            Performance
+        </h2>
+
+        <div class="details-grid">
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Preprocessing
+                </div>
+
+                <div
+                    class="val"
+                    id="prepInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Inference
+                </div>
+
+                <div
+                    class="val"
+                    id="inferenceInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Postprocessing
+                </div>
+
+                <div
+                    class="val"
+                    id="postInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Total Latency
+                </div>
+
+                <div
+                    class="val"
+                    id="latencyInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Effective Processing Speed
+                </div>
+
+                <div
+                    class="val"
+                    id="effectiveFPS"
+                ></div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="key">
+                    Peak VRAM
+                </div>
+
+                <div
+                    class="val"
+                    id="vramInfo"
+                ></div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     VIDEO TAB
+     ============================================================ -->
+
+<div
+    id="videoTab"
+    class="tab-content"
+>
+
+    <div class="video-layout">
+
+
+        <!-- VIDEO -->
+
+        <div>
+
+            <div class="video-box">
+
+                <video
+                    id="detectionVideo"
+                    controls
+                    preload="metadata"
+                >
+
+                    <source
+                        src="assets/detection_video.mp4"
+                        type="video/mp4"
+                    >
+
+                    Your browser does not support
+                    HTML video.
+
+                </video>
+
+            </div>
+
+
+            <div class="controls">
+
+                <button
+                    onclick="previousDetection()"
+                >
+                    ← Previous Detection
+                </button>
+
+                <button
+                    onclick="nextDetection()"
+                >
+                    Next Detection →
+                </button>
+
+            </div>
+
+
+            <p class="note">
+
+                The video plays at normal speed.
+                Playback automatically pauses whenever
+                a valid logo detection is reached.
+
+            </p>
+
+        </div>
+
+
+        <!-- DETECTION INFORMATION -->
+
+        <div class="detection-panel">
+
+            <div class="detected-status">
+
+                ✓ LOGO DETECTED
+
+            </div>
+
+
+            <img
+                id="videoCrop"
+                class="crop-image"
+                src=""
+                alt="Enhanced logo detection"
+                onclick="openImageModal(this.src)"
+            >
+
+
+            <div class="metadata-row">
+
+                <span class="key">
+                    Frame
+                </span>
+
+                <span
+                    class="value"
+                    id="videoFrame"
+                ></span>
+
+            </div>
+
+
+            <div class="metadata-row">
+
+                <span class="key">
+                    Timestamp
+                </span>
+
+                <span
+                    class="value"
+                    id="videoTimestamp"
+                ></span>
+
+            </div>
+
+
+            <div class="metadata-row">
+
+                <span class="key">
+                    Confidence
+                </span>
+
+                <span
+                    class="value confidence"
+                    id="videoConfidence"
+                ></span>
+
+            </div>
+
+
+            <div class="metadata-row">
+
+                <span class="key">
+                    Bounding Box
+                </span>
+
+                <span
+                    class="value"
+                    id="videoBBox"
+                ></span>
+
+            </div>
+
+
+            <div class="metadata-row">
+
+                <span class="key">
+                    Bounding Box Size
+                </span>
+
+                <span
+                    class="value"
+                    id="videoBBoxSize"
+                ></span>
+
+            </div>
+
+
+            <div class="metadata-row">
+
+                <span class="key">
+                    Center Belt
+                </span>
+
+                <span class="value confidence">
+                    ✓ VALID
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     DETECTED FRAMES
+     ============================================================ -->
+
+<div
+    id="framesTab"
+    class="tab-content"
+>
+
+
+    <div class="section">
+
+        <h2>
+            Valid Logo Detections
+        </h2>
+
+        <p class="note">
+
+            Click any detected frame to open a large
+            inspection view. Click the image again to
+            zoom in.
+
+        </p>
+
+    </div>
+
+
+    <div
+        class="gallery"
+        id="frameGallery"
+    ></div>
+
+
+</div>
+
+
+<div class="footer">
+
+    Aditya Birla Computer Vision
+    Validation Report
+
+</div>
+
+
+</div>
+
+
+<!-- ============================================================
+     IMAGE MODAL
+     ============================================================ -->
+
+<div
+    id="imageModal"
+    class="image-modal"
+    onclick="closeImageModal(event)"
+>
+
+    <button
+        class="modal-close"
+        onclick="closeImageModal()"
+    >
+        ×
+    </button>
+
+
+    <div
+        class="modal-content"
+        onclick="event.stopPropagation()"
+    >
+
+        <img
+            id="modalImage"
+            class="modal-image"
+            src=""
+            alt="Detection inspection"
+            onclick="toggleZoom()"
+        >
+
+        <div
+            id="modalTitle"
+            class="modal-title"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+// ================================================================
+// DATA
+// ================================================================
+
+const detections =
+    [];
+
+const summary =
+    {"total_frames": 122, "fps": 30.0, "duration_seconds": 4.066666666666666, "detected_frames": 0, "average_confidence": 0, "average_confidence_percent": 0, "raw_model_detections": 10, "confidence_threshold": 0.5, "center_belt": {"start": 0.3333333333333333, "end": 0.6666666666666666, "left_pixel": 240, "right_pixel": 480, "rule": "Entire bounding box must be inside center belt"}};
+
+const performance =
+    {"preprocess_ms": 10.998343631133109, "inference_ms": 22.03312379509073, "postprocess_ms": 0.2521204590389285, "total_latency_ms": 33.28420899181571, "effective_fps": 30.044277159955673, "peak_vram_mb": 392.22998046875};
+
+const hardware =
+    {"cpu": {"platform": "Linux-6.18.48+-x86_64-with-glibc2.35", "system": "Linux", "release": "6.18.48+", "machine": "x86_64", "processor": "x86_64", "python_version": "3.12.13", "logical_threads": 4, "model": "Intel(R) Xeon(R) CPU @ 2.00GHz", "physical_cores": 2, "ram_gb": 31.35}, "gpu": {"cuda_available": true, "cuda_version": "12.8", "pytorch_version": "2.10.0+cu128", "torchvision_version": "0.25.0+cu128", "gpu_count": 2, "gpu_name": "Tesla T4", "gpu_vram_gb": 14.56, "compute_capability": "7.5"}, "device": "cuda", "pytorch": "2.10.0+cu128", "torchvision": "0.25.0+cu128", "cuda": "12.8"};
+
+
+// ================================================================
+// OVERVIEW
+// ================================================================
+
+document.getElementById(
+    "detectedFrames"
+).textContent =
+    summary.detected_frames;
+
+
+document.getElementById(
+    "avgConfidence"
+).textContent =
+    summary.average_confidence_percent.toFixed(1)
+    + "%";
+
+
+document.getElementById(
+    "totalFrames"
+).textContent =
+    summary.total_frames;
+
+
+document.getElementById(
+    "videoFPS"
+).textContent =
+    summary.fps.toFixed(2);
+
+
+document.getElementById(
+    "videoDuration"
+).textContent =
+    summary.duration_seconds.toFixed(2)
+    + " s";
+
+
+document.getElementById(
+    "confidenceThreshold"
+).textContent =
+    summary.confidence_threshold;
+
+
+document.getElementById(
+    "centerBelt"
+).textContent =
+    summary.center_belt.left_pixel
+    + " px → "
+    + summary.center_belt.right_pixel
+    + " px";
+
+
+// ================================================================
+// HARDWARE
+// ================================================================
+
+document.getElementById(
+    "cpuInfo"
+).textContent =
+    hardware.cpu.model
+    || "Unknown";
+
+
+document.getElementById(
+    "gpuInfo"
+).textContent =
+    hardware.gpu.gpu_name
+    || "CPU only";
+
+
+document.getElementById(
+    "cudaInfo"
+).textContent =
+    hardware.gpu.cuda_version
+    || "Unavailable";
+
+
+document.getElementById(
+    "deviceInfo"
+).textContent =
+    hardware.device;
+
+
+// ================================================================
+// PERFORMANCE
+// ================================================================
+
+document.getElementById(
+    "prepInfo"
+).textContent =
+    performance.preprocess_ms.toFixed(2)
+    + " ms";
+
+
+document.getElementById(
+    "inferenceInfo"
+).textContent =
+    performance.inference_ms.toFixed(2)
+    + " ms";
+
+
+document.getElementById(
+    "postInfo"
+).textContent =
+    performance.postprocess_ms.toFixed(2)
+    + " ms";
+
+
+document.getElementById(
+    "latencyInfo"
+).textContent =
+    performance.total_latency_ms.toFixed(2)
+    + " ms";
+
+
+document.getElementById(
+    "effectiveFPS"
+).textContent =
+    performance.effective_fps.toFixed(2)
+    + " FPS";
+
+
+document.getElementById(
+    "vramInfo"
+).textContent =
+    performance.peak_vram_mb
+    ? performance.peak_vram_mb.toFixed(1)
+      + " MB"
+    : "N/A";
+
+
+// ================================================================
+// TAB SWITCHING
+// ================================================================
+
+function openTab(
+    tabId,
+    button
+) {
+
+    document
+        .querySelectorAll(".tab-content")
+        .forEach(function(element) {
+
+            element.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".tab-button")
+        .forEach(function(element) {
+
+            element.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    document
+        .getElementById(tabId)
+        .classList.add(
+            "active"
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
+}
+
+
+// ================================================================
+// VIDEO
+// ================================================================
+
+const video =
+    document.getElementById(
+        "detectionVideo"
+    );
+
+let currentDetectionIndex = -1;
+let lastPausedFrame = -1;
+let videoFrameCallbackId = null;
+
+
+// ================================================================
+// SHOW DETECTION
+// ================================================================
+
+function showDetection(index) {
+
+    if (
+        index < 0 ||
+        index >= detections.length
+    ) {
+        return;
+    }
+
+    const detection =
+        detections[index];
+
+    currentDetectionIndex =
+        index;
+
+    document.getElementById(
+        "videoCrop"
+    ).src =
+        detection.image;
+
+    document.getElementById(
+        "videoFrame"
+    ).textContent =
+        detection.frame;
+
+    document.getElementById(
+        "videoTimestamp"
+    ).textContent =
+        detection.timestamp;
+
+    document.getElementById(
+        "videoConfidence"
+    ).textContent =
+        detection.confidence_percent.toFixed(1)
+        + "%";
+
+    const bbox =
+        detection.bbox;
+
+    document.getElementById(
+        "videoBBox"
+    ).textContent =
+        "("
+        + bbox.xmin
+        + ", "
+        + bbox.ymin
+        + ") → ("
+        + bbox.xmax
+        + ", "
+        + bbox.ymax
+        + ")";
+
+    document.getElementById(
+        "videoBBoxSize"
+    ).textContent =
+        detection.bbox_width
+        + " × "
+        + detection.bbox_height
+        + " px";
+}
+
+
+// ================================================================
+// FIND DETECTION AT EXACT FRAME
+// ================================================================
+
+function findDetectionAtFrame(
+    frame
+) {
+
+    for (
+        let i = 0;
+        i < detections.length;
+        i++
+    ) {
+
+        if (
+            detections[i].frame === frame
+        ) {
+
+            return i;
+
+        }
+
+    }
+
+    return -1;
+}
+
+
+// ================================================================
+// AUTOMATIC PAUSE
+//
+// IMPORTANT:
+// requestVideoFrameCallback() gives us metadata for the
+// video frame that the browser has actually presented.
+//
+// This is more accurate than:
+//
+//     currentTime * fps
+//
+// because currentTime is a playback timestamp, not a guarantee
+// that the corresponding frame is currently visible.
+// ================================================================
+
+function monitorVideo(
+    now,
+    metadata
+) {
+
+    if (
+        video.paused ||
+        video.ended
+    ) {
+
+        return;
+
+    }
+
+
+    const actualFrame =
+        Math.round(
+            metadata.mediaTime *
+            summary.fps
+        );
+
+
+    const detectionIndex =
+        findDetectionAtFrame(
+            actualFrame
+        );
+
+
+    if (
+        detectionIndex !== -1
+        &&
+        actualFrame !== lastPausedFrame
+    ) {
+
+        /*
+         * The callback corresponds to the frame that
+         * has just been presented by the browser.
+         *
+         * Pause here so the video freezes on the
+         * SAME frame shown in the right-side panel.
+         */
+
+        video.pause();
+
+        lastPausedFrame =
+            actualFrame;
+
+        showDetection(
+            detectionIndex
+        );
+
+        videoFrameCallbackId = null;
+
+        return;
+
+    }
+
+
+    videoFrameCallbackId =
+        video.requestVideoFrameCallback(
+            monitorVideo
+        );
+}
+
+
+// ================================================================
+// START FRAME MONITOR
+// ================================================================
+
+function startVideoMonitoring() {
+
+    if (
+        "requestVideoFrameCallback"
+        in HTMLVideoElement.prototype
+    ) {
+
+        videoFrameCallbackId =
+            video.requestVideoFrameCallback(
+                monitorVideo
+            );
+
+    } else {
+
+        /*
+         * Fallback for browsers that do not support
+         * requestVideoFrameCallback().
+         */
+
+        videoFrameCallbackId =
+            null;
+
+    }
+}
+
+
+// ================================================================
+// VIDEO PLAY
+// ================================================================
+
+video.addEventListener(
+    "play",
+    function() {
+
+        /*
+         * Do NOT manually modify currentTime here.
+         *
+         * The old code did:
+         *
+         *     video.currentTime += 1 / fps
+         *
+         * which could skip over the exact detection frame.
+         */
+
+        startVideoMonitoring();
+
+    }
+);
+
+
+// ================================================================
+// SEEK TO DETECTION
+// ================================================================
+
+function seekToDetection(
+    index
+) {
+
+    if (
+        index < 0 ||
+        index >= detections.length
+    ) {
+
+        return;
+
+    }
+
+
+    const detection =
+        detections[index];
+
+
+    currentDetectionIndex =
+        index;
+
+    lastPausedFrame = -1;
+
+
+    /*
+     * Always pause before seeking.
+     */
+
+    video.pause();
+
+
+    /*
+     * Seek using the timestamp generated from
+     * the original frame index:
+     *
+     *     frame_idx / fps
+     *
+     * This is the same timestamp stored in JSON.
+     */
+
+    video.currentTime =
+        detection.timestamp_seconds;
+
+
+    const onSeeked = function() {
+
+        video.removeEventListener(
+            "seeked",
+            onSeeked
+        );
+
+
+        /*
+         * requestVideoFrameCallback() now tells us
+         * which frame the browser actually presented
+         * after the seek.
+         */
+
+        if (
+            "requestVideoFrameCallback"
+            in HTMLVideoElement.prototype
+        ) {
+
+            video.requestVideoFrameCallback(
+                function(
+                    now,
+                    metadata
+                ) {
+
+                    const actualFrame =
+                        Math.round(
+                            metadata.mediaTime *
+                            summary.fps
+                        );
+
+
+                    /*
+                     * Exact match.
+                     */
+
+                    if (
+                        actualFrame ===
+                        detection.frame
+                    ) {
+
+                        video.pause();
+
+                        lastPausedFrame =
+                            actualFrame;
+
+                        showDetection(
+                            index
+                        );
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Browser landed on a neighbouring
+                     * frame because of decoder timing.
+                     *
+                     * Seek once more directly to the
+                     * exact frame timestamp.
+                     */
+
+                    video.currentTime =
+                        detection.timestamp_seconds;
+
+
+                    video.addEventListener(
+                        "seeked",
+                        function retrySeek() {
+
+                            video.removeEventListener(
+                                "seeked",
+                                retrySeek
+                            );
+
+
+                            video.requestVideoFrameCallback(
+                                function(
+                                    now2,
+                                    metadata2
+                                ) {
+
+                                    const correctedFrame =
+                                        Math.round(
+                                            metadata2.mediaTime *
+                                            summary.fps
+                                        );
+
+
+                                    video.pause();
+
+
+                                    lastPausedFrame =
+                                        detection.frame;
+
+
+                                    showDetection(
+                                        index
+                                    );
+
+                                }
+                            );
+
+                        },
+                        {
+                            once: true
+                        }
+                    );
+
+                }
+            );
+
+        } else {
+
+            /*
+             * Fallback for older browsers.
+             */
+
+            video.pause();
+
+            lastPausedFrame =
+                detection.frame;
+
+            showDetection(
+                index
+            );
+
+        }
+
+    };
+
+
+    video.addEventListener(
+        "seeked",
+        onSeeked,
+        {
+            once: true
+        }
+    );
+
+}
+
+
+// ================================================================
+// NEXT DETECTION
+// ================================================================
+
+function nextDetection() {
+
+    if (
+        detections.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    let next =
+        currentDetectionIndex + 1;
+
+
+    if (
+        next >= detections.length
+    ) {
+
+        next =
+            detections.length - 1;
+
+    }
+
+
+    seekToDetection(
+        next
+    );
+
+}
+
+
+// ================================================================
+// PREVIOUS DETECTION
+// ================================================================
+
+function previousDetection() {
+
+    if (
+        detections.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    let previous =
+        currentDetectionIndex - 1;
+
+
+    if (
+        previous < 0
+    ) {
+
+        previous = 0;
+
+    }
+
+
+    seekToDetection(
+        previous
+    );
+
+}
+
+
+// ================================================================
+
+// ================================================================
+// IMAGE MODAL
+// ================================================================
+
+function openImageModal(
+    imageSrc,
+    title
+) {
+
+    const modal =
+        document.getElementById(
+            "imageModal"
+        );
+
+
+    const image =
+        document.getElementById(
+            "modalImage"
+        );
+
+
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+
+    image.src =
+        imageSrc;
+
+
+    image.classList.remove(
+        "zoomed"
+    );
+
+
+    modalTitle.textContent =
+        title || "Detection Inspection";
+
+
+    modal.classList.add(
+        "active"
+    );
+
+}
+
+
+function closeImageModal(
+    event
+) {
+
+    if (
+        event &&
+        event.target &&
+        event.target.id !==
+        "imageModal"
+    ) {
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "imageModal"
+        )
+        .classList.remove(
+            "active"
+        );
+
+}
+
+
+function toggleZoom() {
+
+    const image =
+        document.getElementById(
+            "modalImage"
+        );
+
+
+    image.classList.toggle(
+        "zoomed"
+    );
+
+}
+
+
+// ================================================================
+// FRAME GALLERY
+// ================================================================
+
+const gallery =
+    document.getElementById(
+        "frameGallery"
+    );
+
+
+detections.forEach(
+    function(
+        detection,
+        index
+    ) {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "frame-card";
+
+
+        card.onclick =
+            function() {
+
+                openImageModal(
+                    detection.image,
+
+                    "Frame "
+                    + detection.frame
+                    + " | "
+                    + detection.timestamp
+                    + " | Confidence "
+                    + detection.confidence_percent.toFixed(1)
+                    + "%"
+                );
+
+            };
+
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            detection.image;
+
+
+        image.alt =
+            "Detection frame "
+            + detection.frame;
+
+
+        const info =
+            document.createElement(
+                "div"
+            );
+
+
+        info.className =
+            "frame-info";
+
+
+        info.innerHTML =
+
+            "<div class='frame-title'>"
+            + "Frame "
+            + detection.frame
+            + "</div>"
+
+            + "<div>"
+            + "Timestamp: "
+            + "<strong>"
+            + detection.timestamp
+            + "</strong>"
+            + "</div>"
+
+            + "<div>"
+            + "Confidence: "
+            + "<span class='confidence'>"
+            + detection.confidence_percent.toFixed(1)
+            + "%"
+            + "</span>"
+            + "</div>"
+
+            + "<div>"
+            + "Bounding Box: "
+            + detection.bbox.xmin
+            + ", "
+            + detection.bbox.ymin
+            + " → "
+            + detection.bbox.xmax
+            + ", "
+            + detection.bbox.ymax
+            + "</div>"
+
+            + "<div>"
+            + "Size: "
+            + detection.bbox_width
+            + " × "
+            + detection.bbox_height
+            + " px"
+            + "</div>"
+
+            + "<div class='note'>"
+            + "✓ Entire bounding box inside "
+            + "center belt"
+            + "</div>"
+
+            + "<div class='note'>"
+            + "Click to inspect / zoom"
+            + "</div>";
+
+
+        card.appendChild(
+            image
+        );
+
+
+        card.appendChild(
+            info
+        );
+
+
+        gallery.appendChild(
+            card
+        );
+
+    }
+);
+
+
+// ================================================================
+// INITIAL DETECTION
+// ================================================================
+
+if (
+    detections.length > 0
+) {
+
+    showDetection(0);
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
+
